@@ -41,6 +41,14 @@ I built ZAPELM to banish those distractions from my view.
     -   Add, edit, or delete rules.
     -   Import and export rules as JSON.
 
+## Installation (GitHub Release)
+
+1. Visit the [GitHub Releases](https://github.com/niumlaque/zapelm/releases) page and download the latest `zapelm-<VERSION>.zip` asset.
+2. Extract the archive to obtain the signed `.xpi` file (for example, `zapelm-<VERSION>.xpi`).
+3. Open Firefox and navigate to `about:addons`.
+4. Click the gear icon, choose "Install Add-on From File…", select the extracted `.xpi`, and confirm the installation dialog.
+5. After installation, pin the ZAPELM icon from the Extensions toolbar menu if you want quick access.
+
 ## Usage
 
 1. Open the page you want to clean up.

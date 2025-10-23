@@ -40,6 +40,14 @@ Private Window で Google へアクセスするとこいつらは毎回 Google �
     -   ルールの追加・編集・削除が可能。
     -   JSON 形式でのインポート / エクスポートをサポート。
 
+## インストール (GitHub リリース版)
+
+1. [GitHub Releases](https://github.com/niumlaque/zapelm/releases) を開き、最新の `zapelm-<VERSION>.zip` アセットをダウンロードする。
+2. ZIP を展開し、署名済みの `.xpi` ファイル (例: `zapelm-<VERSION>.xpi`) を取り出す。
+3. Firefox で `about:addons` を開く。
+4. 歯車アイコンから「ファイルからアドオンをインストール…」を選び、展開した `.xpi` を指定してダイアログの指示に従う。
+5. インストール後、拡張機能ツールバーのメニューから ZAPELM アイコンをピン留めしておくとアクセスしやすい。
+
 ## 使い方
 
 1. 対象ページを開く。
