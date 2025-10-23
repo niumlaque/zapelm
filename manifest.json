@@ -1,0 +1,68 @@
+{
+  "manifest_version": 2,
+  "name": "ZAPELM",
+  "description": "Hide or remove unwanted page elements automatically with custom rules.",
+  "version": "0.1.0",
+  "icons": {
+    "32": "dist/icons/icon-32.png",
+    "48": "dist/icons/icon-48.png",
+    "96": "dist/icons/icon-96.png",
+    "128": "dist/icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "ZAPELM",
+    "default_popup": "dist/popup/index.html",
+    "default_icon": {
+      "32": "dist/icons/icon-32.png",
+      "48": "dist/icons/icon-48.png",
+      "96": "dist/icons/icon-96.png"
+    }
+  },
+  "background": {
+    "scripts": ["dist/background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "commands": {
+    "zapelm.activatePicker": {
+      "suggested_key": {
+        "default": "Alt+Shift+Z"
+      },
+      "description": "Activate the element picker"
+    },
+    "zapelm.toggleEnabled": {
+      "suggested_key": {
+        "default": "Alt+Shift+X"
+      },
+      "description": "Toggle rules on or off for the current page"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "match_about_blank": false,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/popup/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "102.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

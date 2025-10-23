@@ -1,0 +1,18 @@
+{
+  "name": "zapelm-dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "postCreateCommand": "bash -lc 'if [ -f package.json ]; then npm install; else echo \"package.json not found; skipping npm install\"; fi'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

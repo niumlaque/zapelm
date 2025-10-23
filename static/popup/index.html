@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>ZAPELM</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: #f8fafc;
+        color: #0f172a;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .app {
+        min-width: 360px;
+        max-width: 420px;
+        padding: 16px 18px 20px;
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      section {
+        margin-top: 16px;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .header__title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .header__subtitle {
+        font-size: 13px;
+        color: #64748b;
+      }
+
+      .site-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .site-info__host {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .site-info__meta {
+        font-size: 12px;
+        color: #64748b;
+      }
+
+      button {
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: #ffffff;
+        padding: 6px 10px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px rgba(37, 99, 235, 0.18);
+      }
+
+      button:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+
+      button.secondary {
+        background: #e2e8f0;
+        color: #0f172a;
+        box-shadow: none;
+      }
+
+      button.danger {
+        background: #dc2626;
+      }
+
+      .site-toggle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 14px 0 12px;
+        font-size: 13px;
+        color: #475569;
+      }
+
+      .site-toggle input {
+        width: 16px;
+        height: 16px;
+      }
+
+      .rules-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .rule-item {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .rule-item__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .rule-item__selector {
+        font-family: ui-monospace, SFMono-Regular, SFMono, Menlo, Monaco,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 13px;
+        background: #f1f5f9;
+        padding: 6px;
+        border-radius: 4px;
+        color: #0f172a;
+        flex: 1;
+        word-break: break-all;
+      }
+
+      .rule-item__controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 11px;
+        background: #e2e8f0;
+        color: #334155;
+      }
+
+      .chip.success {
+        background: #dcfce7;
+        color: #15803d;
+      }
+
+      .chip.warning {
+        background: #fef9c3;
+        color: #ca8a04;
+      }
+
+      .chip.info {
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+
+      .chip.danger {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
+      .rule-item__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .rule-item__buttons {
+        display: flex;
+        gap: 6px;
+      }
+
+      .empty-state {
+        margin-top: 12px;
+        font-size: 13px;
+        color: #64748b;
+      }
+
+      .rule-form {
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .rule-form[aria-hidden="false"] {
+        display: flex;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .field label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        border-radius: 6px;
+        border: 1px solid #cbd5f5;
+        padding: 8px;
+        font-size: 13px;
+        font-family: inherit;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+
+      .field textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .status {
+        margin-top: 12px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        display: none;
+      }
+
+      .status[data-variant="success"] {
+        display: block;
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .status[data-variant="error"] {
+        display: block;
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+
+      .status[data-variant="info"] {
+        display: block;
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+
+      .toggle-section {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 12px;
+        background: #e2e8f0;
+        color: #1f2937;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .toggle-section:hover {
+        background: #cbd5f5;
+      }
+
+      .import-section {
+        margin-top: 12px;
+      }
+
+      .section-title {
+        margin: 0 0 8px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1f2937;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <span class="header__title">ZAPELM</span>
+        <span class="header__subtitle">Control unwanted elements per domain</span>
+      </header>
+
+      <section>
+        <h2 class="section-title">Manage rules</h2>
+        <label class="site-toggle">
+          <input type="checkbox" data-el="debugToggle" />
+          <span>Send debug logs to the console</span>
+        </label>
+        <div class="site-info">
+          <div>
+            <div data-el="hostname" class="site-info__host">Loading...</div>
+            <div data-el="ruleCount" class="site-info__meta"></div>
+          </div>
+          <button class="secondary" data-action="refresh">Refresh</button>
+        </div>
+        <label class="site-toggle">
+          <input type="checkbox" data-el="siteToggle" />
+          <span>Enable rules on this site</span>
+        </label>
+        <div
+          class="status"
+          data-el="status"
+          role="status"
+          aria-live="polite"
+        ></div>
+        <ul class="rules-list" data-el="ruleList"></ul>
+        <div class="empty-state" data-el="emptyState" hidden>
+          No rules yet. Press Alt + Shift + Z on the page to pick an element, or add one using the form below.
+        </div>
+        <button
+          class="secondary"
+          style="margin-top: 12px"
+          data-action="openForm"
+        >
+          Add via CSS selector
+        </button>
+      </section>
+
+      <section class="form-section" data-el="formSection" hidden>
+        <div class="rule-form" data-el="form" aria-hidden="true">
+          <h2 data-el="formTitle">Add rule</h2>
+          <form data-el="formElement">
+            <div class="field">
+              <label for="selector">CSS selector</label>
+              <input
+                id="selector"
+                type="text"
+                name="selector"
+                required
+                placeholder=".ad-banner, #popup"
+                autocomplete="off"
+              />
+            </div>
+            <div class="field">
+              <label for="action">Action</label>
+              <select id="action" name="action">
+                <option value="hide">Hide (display: none)</option>
+                <option value="remove">Remove (detach from the DOM)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="mode">When to apply</label>
+              <select id="mode" name="mode">
+                <option value="immediate">Apply on page load</option>
+                <option value="observe">Monitor and apply to new elements</option>
+              </select>
+            </div>
+            <label class="site-toggle" style="margin-top: 0">
+              <input type="checkbox" name="enabled" checked />
+              <span>Enable</span>
+            </label>
+            <div class="form-actions">
+              <button type="button" class="secondary" data-action="cancelForm">
+                Cancel
+              </button>
+              <button type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section>
+        <button class="toggle-section" data-action="toggleImport">
+          Import / Export
+          <span aria-hidden="true" data-el="importToggleIndicator">▼</span>
+        </button>
+        <div class="import-section" data-el="importSection" hidden>
+          <div class="field">
+            <label for="json">JSON</label>
+            <textarea
+              id="json"
+              spellcheck="false"
+              data-el="jsonArea"
+              placeholder='{"example.com":[{"selector":".ads",...}]}'
+            ></textarea>
+          </div>
+          <div class="form-actions" style="margin-top: 12px">
+            <button class="secondary" data-action="export">Export</button>
+            <button data-action="import">Import</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <template id="rule-item-template">
+      <li class="rule-item">
+        <div class="rule-item__top">
+          <code class="rule-item__selector" data-slot="selector"></code>
+          <div class="rule-item__controls">
+            <span class="chip info" data-slot="action"></span>
+            <span class="chip warning" data-slot="mode"></span>
+          </div>
+        </div>
+        <div class="rule-item__footer">
+          <label class="site-toggle" style="margin: 0">
+            <input data-action="toggleRule" type="checkbox" />
+            <span style="font-size: 12px">Enabled</span>
+          </label>
+          <div class="rule-item__buttons">
+            <button class="secondary" data-action="editRule">Edit</button>
+            <button class="danger" data-action="deleteRule">Delete</button>
+          </div>
+        </div>
+      </li>
+    </template>
+    <script src="./index.js"></script>
+  </body>
+</html>
