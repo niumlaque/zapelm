@@ -101,8 +101,8 @@ Enable the toggle at the top of the popup to stream messages such as "Applied hi
 
 ### Tips
 
--   When using the `remove` action on sites that inject elements dynamically, set the apply mode to "monitor new elements (observe)".  
-    Leaving it at "immediate" means elements that appear after the initial load will not be removed.
+-   If a page injects the target elements after load, change the `When to apply` field to "Monitor and apply to new elements".  
+    Leaving it at "Apply on page load" only affects the initial DOM snapshot.
 
 ### Security Principles
 

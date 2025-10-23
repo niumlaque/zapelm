@@ -100,7 +100,8 @@ $ ./scripts/build-extension.sh
 
 ### 注意点
 
--   `remove` アクションは、要素が動的に追加されるページでは「適用タイミング」を「監視し新規要素にも適用 (observe)」に設定する必要がある。`immediate` のままだと初期ロード時に存在しない要素は削除されない。
+-   対象要素がページ読み込み後に挿入される場合は、「When to apply」を「Monitor and apply to new elements」に切り替えること。  
+    「Apply on page load」のままだと初期 DOM に存在する要素にしか適用されない。
 
 ### セキュリティ原則
 
