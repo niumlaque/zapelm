@@ -3,6 +3,8 @@
 任意のウェブサイト上で「不要な DOM 要素 (ポップアップ・広告・通知など)」を簡単に選択し、
 自動で非表示または削除できる Firefox 拡張機能である。
 
+![zapelm](https://raw.githubusercontent.com/niumlaque/i/28f3860536490bb42b5f55b38ed1d8c756280b34/i/931c6894-1326-4315-ba5f-ade4c5cef734.gif "zapelm")
+
 ## 概要
 
 ZAPELM は雑多なページから不要な要素を手早く取り除くための拡張機能である。

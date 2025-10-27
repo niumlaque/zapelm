@@ -2,6 +2,8 @@
 
 ZAPELM is a Firefox extension that lets you quickly pick unwanted DOM elements (pop‑ups, ads, notifications, and so on) on any website and hide or remove them automatically.
 
+![zapelm](https://raw.githubusercontent.com/niumlaque/i/28f3860536490bb42b5f55b38ed1d8c756280b34/i/931c6894-1326-4315-ba5f-ade4c5cef734.gif "zapelm")
+
 ## Overview
 
 ZAPELM streamlines the way you tame noisy pages.
